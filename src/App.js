@@ -1,19 +1,49 @@
-
 import './App.css';
-import FullName from './Profile/FullName';
-import Bio from './Profile/Bio';
-import Profession from './Profile/Profession';
+import { Component } from 'react';
 
-function App() {
-  return (
+class App extends Component{
+  constructor(){
+    super();
+    this.state = {
+      show : true,
+      Person : { 
+                fullName : "Soumaya Jebali",
+                bio : "Degree in Telecommunication Network", 
+                imgSrc: "./public/image.jpg", 
+                profession:"Student at GOMYCODE",
+              },
+    }
+    this.clickHandler = this.clickHandler.bind(this);
+  }
 
-    <div >
-      <FullName name ="Soumaya" lastName="Jebali" age="32 years old"/>
-      <Profession profession="I am currently a student" 
-      study=" I'am graduated from Iset'Com"/>
-      <Bio interests="My Interests are"/>
-    </div>
-  );
+
+
+  clickHandler(){
+    this.setState(function (prevState){
+      return{
+        show : !prevState.show ,
+      }
+    });
+  }
+
+  render(){
+    if(this.state.show)
+    return (
+      <div className="container" style={{margin:'auto'}}>
+        <button className="btn btn-primary" onClick={this.clickHandler}  style={{width:'100px',height:'50px',backgroundColor:'pink'}}>Hide</button>
+        <br/>
+        <img src="image.jpg"  width="300px" height="350px"/>
+        <h1>{this.state.Person.fullName}</h1>
+        <h2>{this.state.Person.bio}</h2>
+        <h2>{this.state.Person.profession}</h2>
+      </div>
+      );
+      else return (
+        <div >
+      <button className="btn btn-primary" onClick={this.clickHandler} style={{width:'100px',height:'50px',backgroundColor:'pink'}}>Show</button>
+      </div>
+      );
+  }
 }
 
 export default App;
